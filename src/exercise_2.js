@@ -10,14 +10,28 @@
  * See image here: https://edabit-challenges.s3.amazonaws.com/matchstick_houses.png
  * */
 function countMatchsticksInHouses(step) {
-  // Write your code here
+  if (step === 0) return 0;
+  return 6 + (step - 1) * 5;
 }
 
- /* The time has a format: hours:minutes. Both hours and minutes have two digits, like 09:00. */
- /* Make a regexp to find time in the string: Breakfast at 09:00 in the room 123:456. */
- /* In this task there’s no need to check time correctness yet, so 25:99 can also be a valid result. */
- /* The regexp should not match 123:456. */
-const TIME_REGEX = /[]//* Write your regex here */
+console.log(countMatchsticksInHouses(1));
+console.log(countMatchsticksInHouses(2));
+console.log(countMatchsticksInHouses(4));
+console.log(countMatchsticksInHouses(0));
+
+/* The time has a format: hours:minutes. Both hours and minutes have two digits, like 09:00. */
+/* Make a regexp to find time in the string: Breakfast at 09:00 in the room 123:456. */
+/* In this task there’s no need to check time correctness yet, so 25:99 can also be a valid result. */
+/* The regexp should not match 123:456. */
+// const TIME_REGEX = /[]/;
+/* Write your regex here */
+const TIME_REGEX = /\b\d{2}:\d{2}\b/;
+
+const text = "Breakfast at 09:00 in the room 123:456.";
+
+const matches = text.match(TIME_REGEX);
+
+console.log(matches); // Output: ['09:00']
 
 /**
  * @param {String} text
@@ -33,8 +47,11 @@ const TIME_REGEX = /[]//* Write your regex here */
  * findSecretWord("YFemHUFBbezFBYzFBYLleGBYEFGBMENTment") ➞ "embezzlement"
  * */
 function findSecretWord(text) {
-  // Write your code here
+  return text.match(/[a-z]/g).join("");
 }
+console.log(findSecretWord("UcUNFYGaFYFYGtNUH"));
+console.log(findSecretWord("bEEFGBuFBRrHgUHlNFYaYr"));
+console.log(findSecretWord("YFemHUFBbezFBYzFBYLleGBYEFGBMENTment"));
 
 /**
  * Create a method in the Person class which returns how another person's age compares.
@@ -66,9 +83,22 @@ class Person {
    * p1.compareAge(p3) ➞ "Lily is the same age as me."
    * */
   compareAge(other) {
-    // Write code here!
+    if (this.age < other.age) {
+      return `${other.name} is older than me.`;
+    } else if (this.age > other.age) {
+      return `${other.name} is younger than me.`;
+    } else {
+      return `${other.name} is the same age as me.`;
+    }
   }
 }
+const p1 = new Person("Samuel", 24);
+const p2 = new Person("Joel", 36);
+const p3 = new Person("Lily", 24);
+
+console.log(p1.compareAge(p2));
+console.log(p2.compareAge(p1));
+console.log(p1.compareAge(p3));
 
 /**
  * Write a function redundant that takes in a string `str` and returns a function that returns `str`.
@@ -85,13 +115,23 @@ class Person {
  * f3() ➞ ""
  * */
 function redundant(str) {
-  // Write your code here
+  return function () {
+    return str;
+  };
 }
+const f1 = redundant("apple");
+console.log(f1());
+
+const f2 = redundant("pear");
+console.log(f2());
+
+const f3 = redundant("");
+console.log(f3());
 
 module.exports = {
   countMatchsticksInHouses,
   TIME_REGEX,
   findSecretWord,
   Person,
-  redundant
-}
+  redundant,
+};
