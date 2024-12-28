@@ -31,7 +31,7 @@ const text = "Breakfast at 09:00 in the room 123:456.";
 
 const matches = text.match(TIME_REGEX);
 
-console.log(matches); // Output: ['09:00']
+console.log(matches); 
 
 /**
  * @param {String} text
